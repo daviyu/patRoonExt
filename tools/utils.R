@@ -18,10 +18,10 @@ downloadFile <- function(what, url, dest, sha256 = NULL)
 
     # increase timeout for large files, thanks to https://stackoverflow.com/a/68944877
     otimeout <- getOption("timeout")
-    options(timeout = max(900, otimeout))
+    options(timeout = max(9000, otimeout))
     on.exit(options(timeout = otimeout), add = TRUE)
 
-    if (download.file(url, dest, mode = "wb") != 0)
+    if (download.file(url, dest, mode = "libcurl") != 0)
     {
         warning(sprintf("Failed to download %s from '%s'", what, url), call. = FALSE)
         return(FALSE)
