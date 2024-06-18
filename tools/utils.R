@@ -21,7 +21,7 @@ downloadFile <- function(what, url, dest, sha256 = NULL)
     options(timeout = max(9000, otimeout))
     on.exit(options(timeout = otimeout), add = TRUE)
 
-    if (download.file(url, dest, mode = "libcurl") != 0)
+    if (download.file(url, dest, mode = "wb", method = "libcurl") != 0)
     {
         warning(sprintf("Failed to download %s from '%s'", what, url), call. = FALSE)
         return(FALSE)
